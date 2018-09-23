@@ -18,7 +18,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Server
-const port = process.env.port || 3000;
+const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 server.listen(port);
 console.log("Running on port " + port);
