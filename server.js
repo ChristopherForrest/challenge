@@ -29,34 +29,44 @@ app.post("/", function(req, res) {
 
   // default object with required fields
   var data = {
-    from: req.body.from + '@mailerservice.com',
+    from: req.body.from + '@freeemailerservice.com',
     to: req.body.to,
     subject: req.body.subject,
     text: req.body.text
   };
 
   // forming object before sending as mailgun && Sendgrid will break if cc or bcc is empty / undefined
-  if (req.body.cc !== "" || undefined) {
+  
+  if (req.body.cc == (!undefined && !"")) {
     data.cc = req.body.cc;
   }
-  if (req.body.bcc !== "" || undefined) {
+  if (req.body.bcc == (!undefined && !"")) {
     data.bcc = req.body.bcc;
   }
-
+  console.log(data)
   // Mailgun returns error object else is undefined. SendGrid sends if error with mailgun.
   mailgun.messages().send(data, function(error, body) {
+    
     if (error == undefined) {
       console.log("sending via mailgun...");
       res.sendStatus(200);  // Send status OK
-    } else {
+    } 
+    else {
       console.log("sending via sendgrid..");
+
       sgMail.send(data, function(error, body) {
-        if (error !== undefined) {
-          res.send(error); // Send error back to client as SendGrid has also returned an error.
-        } else {
-          res.send(200); // Send status OK
+        
+        if (error !== null) {
+          res.sendStatus(400); // Send error back to client as SendGrid has also returned an error.
+        } 
+        else {
+          res.sendStatus(200); // Send status OK
         }
-      });
+      }).catch(function(error){
+
+      })
+
+      
     }
   });
 });
