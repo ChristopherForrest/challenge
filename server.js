@@ -2,13 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const http = require("http");
 const app = express();  
+const bodyParser = require("body-parser");
 
 //Components
-var requestChecker = require("./components/checkRequest");
+var checkRequest = require("./components/checkRequest");
 var sendMail = require("./components/sendMail")
 
-//BodyParser
-var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Server
@@ -21,7 +20,7 @@ console.log("Running on port " + port);
 app.post("/", function(req, res) {
 
   // checks request for invalid fields
-  data = requestChecker(req)
+  data = checkRequest(req)
 
   // Sends email via sendMail component
   sendMail(req,res,data)

@@ -1,5 +1,3 @@
-
-
 // SendGrid
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -32,8 +30,7 @@ function sendMail(req,res,data){
             }
           }).catch(function(error){
     
-          })
-          
+          })   
         }
       });
 
