@@ -2,38 +2,6 @@
 
 ### View live - https://christopherforrest.github.io/formexample.github.io/
 ## Quick start 
-<details>
-<summary>Quick Start HTML</summary>
-
-   *When sending to multiple recipients they're to be seperated by a comma*
-
-```
-    <form action="https://freeemailservice.herokuapp.com/" method="post"  enctype="application/x-www-form-urlencoded">
-        From:
-        <br>
-        <input type="text" name="from" placeholder="Name">
-        <br> To:
-        <br>
-        <input type="text" name="to" placeholder="Recipients Email">
-        <br> Subject:
-        <br>
-        <input type="text" name="subject" placeholder="Subject">
-        <br> cc:
-        <br>
-        <input type="text" name="cc" placeholder="cc">
-        <br> bcc:
-        <br>
-        <input type="text" name="bcc" placeholder="bcc">
-        <br> Message:
-        <br>
-        <input type="text" name="text" size="50" placeholder="Your message">
-        <br>
-        <br>
-        <input type="submit" value="Send">
-        <input type="reset" value="Reset">
-    </form>
-```
-</details>
 
 <details>
 <summary>Quick Start CURL</summary>
@@ -43,6 +11,123 @@ curl -d "from=example@gmail.com&to=example@gmail.com&subject=yousubject&text=you
 ```
 
 </details>
+
+<details>
+<summary>Quick Start HTML</summary>
+
+   *When sending to multiple recipients they're to be seperated by a comma*
+
+```
+<form action="https://freeemailservice.herokuapp.com/" method="post" enctype="application/x-www-form-urlencoded	">
+    From:
+    <br>
+    <input type="text" name="from" placeholder="Name" required >
+    <br> To:
+    <br>
+    <input type="email" name="to" placeholder="Recipients Email" required>
+    <br> Subject:
+    <br>
+    <input type="text" name="subject" placeholder="Subject" required>
+    <br> cc:
+    <br>
+    <input type="email" name="cc" placeholder="cc">
+    <br> bcc:
+    <br>
+    <input type="email" name="bcc" placeholder="bcc">
+    <br> Message:
+    <br>
+    <input type="text" name="text" size="50" placeholder="Your message" required>
+    <br>
+    <br>
+    <input type="submit" value="Send">
+    <input type="reset" value="Reset">
+</form>
+```
+</details>
+
+<details>
+<summary>Quick Start HTML + Bootstrap/CSS (Boilerplate)</summary>
+
+Index.html
+
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="https://freeemailservice.herokuapp.com/" method="post" enctype="application/x-www-form-urlencoded">
+
+            <div class="form-group">
+                <label for="from">Name<span class="required">*</span></label>
+                <input type="text" name="from" class="form-control" id="from" aria-describedby="emailHelp" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="to">Recipients<span class="required">*</span></label>
+                <input type="email" name="to" class="form-control" id="to" aria-describedby="emailHelp" placeholder="Example@gmail.com, Example@gmail.com"  class="form-control" multiple required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject<span class="required">*</span></label>
+                <input type="text" name="subject" class="form-control" id="subject" aria-describedby="emailHelp" placeholder="Subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cc">CC</label>
+                <input type="email" name="cc" class="form-control" id="cc" aria-describedby="emailHelp" placeholder="Example@gmail.com, Example@gmail.com"  class="form-control" multiple>
+            </div>
+
+            <div class="form-group">
+                <label for="bcc">BCC</label>
+                <input type="email" name="bcc" class="form-control" id="bcc" aria-describedby="emailHelp" placeholder="Example@gmail.com, Example@gmail.com"  class="form-control" multiple>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Message<span class="required">*</span></label>
+                <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="3" placeholder="Your Message" required></textarea>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
+```
+
+main.css
+
+```
+body{
+    background-color:whitesmoke;
+}
+
+.container{
+    background-color:aliceblue;
+    border:black 1px solid;
+    padding:3%;
+    margin-top:1%;
+}
+.required{
+    color:red;
+}
+```
+
+</details>
+
 
 
 ## Problem / Solution
@@ -54,6 +139,8 @@ In some cases a decoupled back end may also be benificial when serving multiple 
 
 
 ## How to use
+
+Use the quick starts above or send your own POST request to: https://freeemailservice.herokuapp.com/
 
 This application takes in a single POST request that has four manditory fields:
 * to
@@ -79,7 +166,7 @@ and two optional fields
 
 ```
 
-Use the quick starts above or send your own POST request to: https://freeemailservice.herokuapp.com/
+
 
 ## Services / Technologies
 
@@ -90,4 +177,7 @@ Mailgun - https://www.mailgun.com/
 Sendgrid - https://sendgrid.com/
 
 BodyParser - https://www.npmjs.com/package/body-parser
+
+JEST - https://jestjs.io/
+
 
