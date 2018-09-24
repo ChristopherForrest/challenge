@@ -37,13 +37,14 @@ app.post("/", function(req, res) {
 
   // forming object before sending as mailgun && Sendgrid will break if cc or bcc is empty / undefined
   
-  if (req.body.cc == (!undefined && !"")) {
+  if (req.body.cc !== (!undefined && !"")) {
     data.cc = req.body.cc;
   }
-  if (req.body.bcc == (!undefined && !"")) {
+
+  if (req.body.bcc !== (!undefined && !"")) {
     data.bcc = req.body.bcc;
   }
-  console.log(data)
+
   // Mailgun returns error object else is undefined. SendGrid sends if error with mailgun.
   mailgun.messages().send(data, function(error, body) {
     
