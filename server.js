@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
-const app = express();
+const app = express();  
 
 // SendGrid
 const sgMail = require("@sendgrid/mail");
@@ -29,7 +29,7 @@ app.post("/", function(req, res) {
 
   // default object with required fields
   var data = {
-    from: req.body.from,
+    from: req.body.from + '@mailerservice.com',
     to: req.body.to,
     subject: req.body.subject,
     text: req.body.text
@@ -60,3 +60,4 @@ app.post("/", function(req, res) {
     }
   });
 });
+
